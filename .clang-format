@@ -26,6 +26,7 @@ BraceWrapping:
   AfterNamespace:  false
   AfterStruct:     false
   AfterUnion:      false
+  AfterExternBlock: false
   BeforeCatch:     false
   BeforeElse:      false
   IndentBraces:    false
