@@ -7,4 +7,5 @@ int white();
 int black();
 void move();
 
+
 #endif                                                                                          
