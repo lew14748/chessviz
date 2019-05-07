@@ -6,4 +6,4 @@ int ctoi(char input[6]);
 int white();
 int black();
 void move();
-#endif                                                                                          
+#endif
