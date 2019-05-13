@@ -264,3 +264,4 @@ int checkD()
         j += cj;
     }
     return 1;
+}
