@@ -53,7 +53,7 @@ int white()
     switch (desk[Y1][X1]) {
     case 'P':
         if ((desk[Y2][X2] == ' ') && (Y1 == 1) && (X1 == X2) && (Y2 - Y1 > 0)
-            && (Y2 - Y1 < 3)) {
+            && (Y2 - Y1 < 3) && checkY()) {
             return 1;
         }
         if ((desk[Y2][X2] == ' ') && (X2 == X1) && (Y2 - Y1 == 1)) {
@@ -63,6 +63,15 @@ int white()
             && ((X2 - X1 == 1) || (X2 - X1 == -1)) && (Y2 - Y1 == 1)) {
             return 1;
         }
+        break;
+    case 'R':
+        if ((Y2 == Y1) && (checkX())) {
+            return 1;
+        }
+        if ((X2 == X1) && (checkY())) {
+            return 1;
+        }
+        break;
     }
     return 0;
 }
@@ -74,7 +83,7 @@ int black()
     switch (desk[Y1][X1]) {
     case 'p':
         if ((desk[Y2][X2] == ' ') && (Y1 == 6) && (X1 == X2) && (Y1 - Y2 > 0)
-            && (Y1 - Y2 < 3)) {
+            && (Y1 - Y2 < 3) && checkY()) {
             return 1;
         }
         if ((desk[Y2][X2] == ' ') && (X2 == X1) && (Y1 - Y2 == 1)) {
@@ -84,6 +93,14 @@ int black()
             && ((X1 - X2 == 1) || (X1 - X2 == -1)) && (Y1 - Y2 == 1)) {
             return 1;
         }
+        break;
+    case 'r':
+        if ((Y2 == Y1) && (checkX())) {
+            return 1;
+        }
+        if ((X2 == X1) && (checkY())) {
+            return 1;
+        }
     }
     return 0;
 }
@@ -91,4 +108,42 @@ void move()
 {
     desk[Y2][X2] = desk[Y1][X1];
     desk[Y1][X1] = ' ';
+}
+
+int checkY()
+{
+    int i, c1 = Y1, c2 = Y2;
+    if (X1 != X2) {
+        return 0;
+    }
+    if (Y1 > Y2) {
+        c1 = Y2;
+        c2 = Y1;
+    }
+    for (i = c1 + 1; i < c2; i++) {
+        if ((desk[i][X1] > 'a' && desk[i][X1] < 's')
+            || (desk[i][X1] > 'A' && desk[i][X1] < 'S')) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int checkX()
+{
+    int i, c1 = X1, c2 = X2;
+    if (Y1 != Y2) {
+        return 0;
+    }
+    if (X1 > X2) {
+        c1 = X2;
+        c2 = X1;
+    }
+    for (i = c1 + 1; i < c2; i++) {
+        if ((desk[Y1][i] > 'a' && desk[Y1][i] < 's')
+            || (desk[Y1][i] > 'A' && desk[Y1][i] < 'S')) {
+            return 0;
+        }
+    }
+    return 1;
 }
