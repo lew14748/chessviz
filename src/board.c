@@ -98,6 +98,23 @@ int white()
             return 1;
         }
         break;
+    case 'B':
+        if (checkD()) {
+            return 1;
+        }
+        break;
+    case 'K':
+        if (checkX() || checkY() || checkD()) {
+            return 1;
+        }
+        break;
+    case 'Q':
+        if ((Y1 - Y2 != 1) && (Y2 - Y1 != 1)
+            && ((X1 - X2 != 1) && (X2 - X1 != 1))) {
+            break;
+        } else {
+            return 1;
+        }
     }
     return 0;
 }
@@ -154,6 +171,23 @@ int black()
             return 1;
         }
         break;
+    case 'b':
+        if (checkD()) {
+            return 1;
+        }
+        break;
+    case 'k':
+        if (checkX() || checkY() || checkD()) {
+            return 1;
+        }
+        break;
+    case 'q':
+        if ((Y1 - Y2 != 1) && (Y2 - Y1 != 1)
+            && ((X1 - X2 != 1) && (X2 - X1 != 1))) {
+            break;
+        } else {
+            return 1;
+        }
     }
     return 0;
 }
@@ -200,3 +234,33 @@ int checkX()
     }
     return 1;
 }
+
+int checkD()
+{
+    int i, j, c1 = Y2, c2 = Y1, ci, cj;
+    if (((Y2 - Y1) != (X2 - X1)) && ((Y2 - Y1) != (X1 - X2))) {
+        return 0;
+    }
+    if (Y2 > Y1) {
+        c1 = Y1;
+        c2 = Y2;
+        ci = 1;
+    } else {
+        ci = -1;
+    }
+    if (X2 > X1) {
+        cj = 1;
+    } else {
+        cj = -1;
+    }
+    i = Y1 + ci;
+    j = X1 + cj;
+    while ((i < c2) && (i > c1)) {
+        if (((desk[i][j] > 'a') && (desk[i][j] < 's'))
+            || ((desk[i][j] > 'A') && (desk[i][j] < 'S'))) {
+            return 0;
+        }
+        i += ci;
+        j += cj;
+    }
+    return 1;
