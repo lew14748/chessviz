@@ -19,19 +19,19 @@ char input[7];
 CTEST(inputdata, chartointer)
 {
     strcpy(input, "E2fE4"); // incorrect format
-    int inc1 = chartoint(input);
+    int inc1 = ctoi(input);
 
     strcpy(input, "E2xE4"); // chop-chop
-    int inc2 = chartoint(input);
+    int inc2 = ctoi(input);
 
     strcpy(input, "E2-E4"); // sprint
-    int c3 = chartoint(input);
+    int c3 = ctoi(input);
 
     strcpy(input, "E2-E9"); // out of field
-    int inc4 = chartoint(input);
+    int inc4 = ctoi(input);
 
     strcpy(input, "GOOD DAY, SIR!"); // rubbish
-    int inc5 = chartoint(input);
+    int inc5 = ctoi(input);
 
     const int exp1 = 0;
     const int exp2 = 0;
@@ -49,31 +49,31 @@ CTEST(inputdata, chartointer)
 CTEST(moving, movepawn) // pawn test
 {
     strcpy(input, "D7-D6"); // First stroll
-    chartoint(input);
+    ctoi(input);
     desk[Y1][X1] = 'p';
     int c1 = black();
 
     strcpy(input, "D7-D5"); // First rush
-    chartoint(input);
+    ctoi(input);
     int c2 = black();
 
     desk[Y1][X1] = ' ';
 
     strcpy(input, "D6-D4"); // Rush in the middle
-    chartoint(input);
+    ctoi(input);
     desk[Y1][X1] = 'p';
     int c3 = black();
 
     strcpy(input, "D6-C5"); // like chopping
-    chartoint(input);
+    ctoi(input);
     int c4 = black();
 
     strcpy(input, "D6-D7"); // backwards
-    chartoint(input);
+    ctoi(input);
     int c5 = black();
 
     strcpy(input, "D6xC5"); // chopping
-    chartoint(input);
+    ctoi(input);
     desk[Y2][X2] = 'P';
     int c6 = black();
 
@@ -81,7 +81,7 @@ CTEST(moving, movepawn) // pawn test
     desk[Y1][X1] = ' ';
 
     strcpy(input, "D7-D5"); // overstepping
-    chartoint(input);
+    ctoi(input);
     desk[Y1][X1] = 'P';
     desk[Y1 + 1][X1] = 'P';
     int c7 = black();
@@ -109,33 +109,33 @@ CTEST(moving, movepawn) // pawn test
 CTEST(moving, moverook) // rook test
 {
     strcpy(input, "D4-D7"); // ahead
-    chartoint(input);
+    ctoi(input);
     desk[Y1][X1] = 'R';
     int c1 = white();
 
     strcpy(input, "D4-D2"); // backwards
-    chartoint(input);
+    ctoi(input);
     int c2 = white();
 
     strcpy(input, "D4-F4"); // right
-    chartoint(input);
+    ctoi(input);
     int c3 = white();
 
     strcpy(input, "D4-B4"); // left
-    chartoint(input);
+    ctoi(input);
     int c4 = white();
 
     strcpy(input, "D4-F6"); // diagonal
-    chartoint(input);
+    ctoi(input);
     int c5 = white();
 
     strcpy(input, "D4xD5"); // chop-chop
-    chartoint(input);
+    ctoi(input);
     desk[Y2][X2] = 'r';
     int c6 = white();
 
     strcpy(input, "D4-D6"); // overstepping
-    chartoint(input);
+    ctoi(input);
     int c7 = white();
 
     desk[Y1][X1] = ' ';

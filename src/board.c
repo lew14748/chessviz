@@ -4,7 +4,7 @@
 
 extern char desk[8][8];
 int X1, X2, Y1, Y2;
-char input[7] = "NULL";
+extern char input[7];
 void scan(int side)
 {
     while (1) {
