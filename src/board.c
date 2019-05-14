@@ -7,7 +7,6 @@ int X1, X2, Y1, Y2;
 char input[7] = "NULL";
 void scan(int side)
 {
-    
     while (1) {
         while (1) {
             fgets(input, 7, stdin);
