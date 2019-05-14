@@ -4,10 +4,10 @@
 
 extern char desk[8][8];
 int X1, X2, Y1, Y2;
-
+char input[7] = "NULL";
 void scan(int side)
 {
-    char input[7] = "NULL";
+    
     while (1) {
         while (1) {
             fgets(input, 7, stdin);
@@ -39,6 +39,10 @@ int ctoi(char input[7])
     Y1 = (int)input[1] - '1';
     X2 = (int)input[3] - 'A';
     Y2 = (int)input[4] - '1';
+    if ((input[2] == 'x') && (desk[Y2][X2] == ' ')) {
+        printf("Вроде никого нет, чтобы рубить?\n");
+        return 0;
+    }
     if ((X2 < 8) && (X2 >= 0) && (Y2 >= 0) && (Y2 < 8) && (X1 >= 0) && (X1 < 8)
         && (Y1 >= 0) && (Y1 < 8))
         return 1;
@@ -52,6 +56,11 @@ int white()
     }
     switch (desk[Y1][X1]) {
     case 'P':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
+
         if ((desk[Y2][X2] == ' ') && (Y1 == 1) && (X1 == X2) && (Y2 - Y1 > 0)
             && (Y2 - Y1 < 3) && checkY()) {
             return 1;
@@ -65,6 +74,10 @@ int white()
         }
         break;
     case 'R':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if ((Y2 == Y1) && (checkX())) {
             return 1;
         }
@@ -73,6 +86,10 @@ int white()
         }
         break;
     case 'N':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if ((Y1 - Y2 == 2) && (X1 - X2 == 1)) {
             return 1;
         }
@@ -99,16 +116,28 @@ int white()
         }
         break;
     case 'B':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if (checkD()) {
             return 1;
         }
         break;
     case 'K':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if (checkX() || checkY() || checkD()) {
             return 1;
         }
         break;
     case 'Q':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if ((Y1 - Y2 != 1) && (Y2 - Y1 != 1)
             && ((X1 - X2 != 1) && (X2 - X1 != 1))) {
             break;
@@ -125,6 +154,10 @@ int black()
     }
     switch (desk[Y1][X1]) {
     case 'p':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if ((desk[Y2][X2] == ' ') && (Y1 == 6) && (X1 == X2) && (Y1 - Y2 > 0)
             && (Y1 - Y2 < 3) && checkY()) {
             return 1;
@@ -138,6 +171,10 @@ int black()
         }
         break;
     case 'r':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if ((Y2 == Y1) && (checkX())) {
             return 1;
         }
@@ -146,6 +183,10 @@ int black()
         }
         break;
     case 'n':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if ((Y1 - Y2 == 2) && (X1 - X2 == 1)) {
             return 1;
         }
@@ -172,16 +213,28 @@ int black()
         }
         break;
     case 'b':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if (checkD()) {
             return 1;
         }
         break;
     case 'k':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if (checkX() || checkY() || checkD()) {
             return 1;
         }
         break;
     case 'q':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
         if ((Y1 - Y2 != 1) && (Y2 - Y1 != 1)
             && ((X1 - X2 != 1) && (X2 - X1 != 1))) {
             break;
