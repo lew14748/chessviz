@@ -39,11 +39,11 @@ CTEST(inputdata, chartointer)
     const int exp4 = 0;
     const int exp5 = 0;
 
-    ASSERT_EQUAL(exp1, c1);
-    ASSERT_EQUAL(exp2, c2);
+    ASSERT_EQUAL(exp1, inc1);
+    ASSERT_EQUAL(exp2, inc2);
     ASSERT_EQUAL(exp3, c3);
-    ASSERT_EQUAL(exp4, c4);
-    ASSERT_EQUAL(exp5, c5);
+    ASSERT_EQUAL(exp4, inc4);
+    ASSERT_EQUAL(exp5, inc5);
 }
 
 CTEST(moving, movepawn) // pawn test
