@@ -1,6 +1,6 @@
+#include "../ctest_library/ctest.h"
 #include "../src/board.h"
 #include "../src/board_print_plain.h"
-#include "../ctest_library/ctest.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -59,7 +59,7 @@ CTEST(moving, movepawn) // pawn test
 
     desk[Y1][X1] = ' ';
 
-    strcpy(input, "D6-D4"); //Rush in the middle
+    strcpy(input, "D6-D4"); // Rush in the middle
     chartoint(input);
     desk[Y1][X1] = 'p';
     int c3 = black();
@@ -106,3 +106,54 @@ CTEST(moving, movepawn) // pawn test
     ASSERT_EQUAL(exp7, c7);
 }
 
+CTEST(moving, moverook) // rook test
+{
+    strcpy(input, "D4-D7"); // ahead
+    chartoint(input);
+    desk[Y1][X1] = 'R';
+    int c1 = white();
+
+    strcpy(input, "D4-D2"); // backwards
+    chartoint(input);
+    int c2 = white();
+
+    strcpy(input, "D4-F4"); // right
+    chartoint(input);
+    int c3 = white();
+
+    strcpy(input, "D4-B4"); // left
+    chartoint(input);
+    int c4 = white();
+
+    strcpy(input, "D4-F6"); // diagonal
+    chartoint(input);
+    int c5 = white();
+
+    strcpy(input, "D4xD5"); // chop-chop
+    chartoint(input);
+    desk[Y2][X2] = 'r';
+    int c6 = white();
+
+    strcpy(input, "D4-D6"); // overstepping
+    chartoint(input);
+    int c7 = white();
+
+    desk[Y1][X1] = ' ';
+    desk[Y2 - 1][X2] = ' ';
+
+    const int exp1 = 1;
+    const int exp2 = 1;
+    const int exp3 = 1;
+    const int exp4 = 1;
+    const int exp5 = 0;
+    const int exp6 = 1;
+    const int exp7 = 0;
+
+    ASSERT_EQUAL(exp1, c1);
+    ASSERT_EQUAL(exp2, c2);
+    ASSERT_EQUAL(exp3, c3);
+    ASSERT_EQUAL(exp4, c4);
+    ASSERT_EQUAL(exp5, c5);
+    ASSERT_EQUAL(exp6, c6);
+    ASSERT_EQUAL(exp7, c7);
+}

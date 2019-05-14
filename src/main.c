@@ -25,7 +25,7 @@ int main()
         scan(2);
         move();
         printboard();
-       // break;
+        // break;
     }
 
     return 0;
