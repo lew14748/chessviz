@@ -30,7 +30,7 @@ CTEST(inputdata, chartointer)
     strcpy(input, "E2-E9"); // out of field
     int inc4 = ctoi(input);
 
-    strcpy(input, "GOOD DAY, SIR!"); // rubbish
+    strcpy(input, "GOO"); // rubbish
     int inc5 = ctoi(input);
 
     const int exp1 = 0;
