@@ -30,7 +30,7 @@ CTEST(inputdata, chartointer)
     strcpy(input, "E2-E9"); // out of field
     int inc4 = chartoint(input);
 
-    strcpy(input, "GOOD DAY, SIR!"); // Вво
+    strcpy(input, "GOOD DAY, SIR!"); // rubbish
     int inc5 = chartoint(input);
 
     const int exp1 = 0;
@@ -45,3 +45,64 @@ CTEST(inputdata, chartointer)
     ASSERT_EQUAL(exp4, c4);
     ASSERT_EQUAL(exp5, c5);
 }
+
+CTEST(moving, movepawn) // pawn test
+{
+    strcpy(input, "D7-D6"); // First stroll
+    chartoint(input);
+    desk[Y1][X1] = 'p';
+    int c1 = black();
+
+    strcpy(input, "D7-D5"); // First rush
+    chartoint(input);
+    int c2 = black();
+
+    desk[Y1][X1] = ' ';
+
+    strcpy(input, "D6-D4"); //Rush in the middle
+    chartoint(input);
+    desk[Y1][X1] = 'p';
+    int c3 = black();
+
+    strcpy(input, "D6-C5"); // like chopping
+    chartoint(input);
+    int c4 = black();
+
+    strcpy(input, "D6-D7"); // backwards
+    chartoint(input);
+    int c5 = black();
+
+    strcpy(input, "D6xC5"); // chopping
+    chartoint(input);
+    desk[Y2][X2] = 'P';
+    int c6 = black();
+
+    desk[Y2][X2] = ' ';
+    desk[Y1][X1] = ' ';
+
+    strcpy(input, "D7-D5"); // overstepping
+    chartoint(input);
+    desk[Y1][X1] = 'P';
+    desk[Y1 + 1][X1] = 'P';
+    int c7 = black();
+
+    desk[Y1][X1] = ' ';
+    desk[Y1 + 1][X1] = ' ';
+
+    const int exp1 = 1;
+    const int exp2 = 1;
+    const int exp3 = 0;
+    const int exp4 = 0;
+    const int exp5 = 0;
+    const int exp6 = 1;
+    const int exp7 = 0;
+
+    ASSERT_EQUAL(exp1, c1);
+    ASSERT_EQUAL(exp2, c2);
+    ASSERT_EQUAL(exp3, c3);
+    ASSERT_EQUAL(exp4, c4);
+    ASSERT_EQUAL(exp5, c5);
+    ASSERT_EQUAL(exp6, c6);
+    ASSERT_EQUAL(exp7, c7);
+}
+
