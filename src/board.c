@@ -34,6 +34,9 @@ void scan(int side)
 
 int ctoi(char input[7])
 {
+    if ((input[2] != '-') && (input[2] != 'x')) {
+        return 0;
+    }
     X1 = (int)input[0] - 'A';
     Y1 = (int)input[1] - '1';
     X2 = (int)input[3] - 'A';
@@ -50,8 +53,8 @@ int ctoi(char input[7])
 
 int white()
 {
-    if (desk[Y1][X1] > 64 && desk[Y1][X1] < 73) {
-        return 0;
+    if ((desk[Y2][X2] > 'A') && (desk[Y2][X2] < 'S')) {
+        return 0; //не рубим своих
     }
     switch (desk[Y1][X1]) {
     case 'P':
@@ -59,17 +62,17 @@ int white()
             printf("Вроде надо рубить?\n");
             break;
         }
-
         if ((desk[Y2][X2] == ' ') && (Y1 == 1) && (X1 == X2) && (Y2 - Y1 > 0)
             && (Y2 - Y1 < 3) && checkY()) {
-            return 1;
+            return 1; //начальный ход
         }
         if ((desk[Y2][X2] == ' ') && (X2 == X1) && (Y2 - Y1 == 1)) {
-            return 1;
+            return 1; //ход по пустым клеткам
         }
-        if ((desk[Y2][X2] > 'a' && desk[Y2][X2] < 's')
-            && ((X2 - X1 == 1) || (X2 - X1 == -1)) && (Y2 - Y1 == 1)) {
-            return 1;
+        if ((desk[Y2][X2] < 's' && desk[Y2][X2] > 'a')
+            && ((X2 - X1 == 1) || (X2 - X1 == -1)) && (Y2 - Y1 == 1)
+            && (input[2] == 'x')) {
+            return 1; //рубим чужих
         }
         break;
     case 'R':
@@ -128,7 +131,10 @@ int white()
             printf("Вроде надо рубить?\n");
             break;
         }
-        if (checkX() || checkY() || checkD()) {
+        if ((Y1 - Y2 != 1) && (Y2 - Y1 != 1)
+            && ((X1 - X2 != 1) && (X2 - X1 != 1))) {
+            break;
+        } else {
             return 1;
         }
         break;
@@ -137,12 +143,10 @@ int white()
             printf("Вроде надо рубить?\n");
             break;
         }
-        if ((Y1 - Y2 != 1) && (Y2 - Y1 != 1)
-            && ((X1 - X2 != 1) && (X2 - X1 != 1))) {
-            break;
-        } else {
+        if (checkX() || checkY() || checkD()) {
             return 1;
         }
+        break;
     }
     return 0;
 }
@@ -225,21 +229,21 @@ int black()
             printf("Вроде надо рубить?\n");
             break;
         }
-        if (checkX() || checkY() || checkD()) {
-            return 1;
-        }
-        break;
-    case 'q':
-        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
-            printf("Вроде надо рубить?\n");
-            break;
-        }
         if ((Y1 - Y2 != 1) && (Y2 - Y1 != 1)
             && ((X1 - X2 != 1) && (X2 - X1 != 1))) {
             break;
         } else {
             return 1;
         }
+    case 'q':
+        if ((input[2] == '-') && (desk[Y2][X2] != ' ')) {
+            printf("Вроде надо рубить?\n");
+            break;
+        }
+        if (checkX() || checkY() || checkD()) {
+            return 1;
+        }
+        break;
     }
     return 0;
 }
